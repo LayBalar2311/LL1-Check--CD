@@ -1,13 +1,309 @@
+/* Import fonts from Google Fonts for a polished look */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background: linear-gradient(135deg, #1e2a44 0%, #0f172a 100%);
+  color: #e0e0e0;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Container for the entire app */
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Main title styling */
+h1 {
+  text-align: center;
+  color: #ffd700;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Card styling for sections */
+.card {
+  background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+  border: none;
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+/* Textarea for grammar input */
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background: #fff;
+  color: #1e293b;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Input for string */
+input[type="text"] {
+  width: 100%;
+  height: 60px;
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background: #fff;
+  color: #1e293b;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+  outline: none;
+}
+
+/* Button styling */
+button {
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #357abd 0%, #2a6395 100%);
+  transform: scale(1.05);
+}
+
+/* Error message styling */
+.error {
+  color: #ff6b6b;
+  margin-top: 15px;
+  font-weight: 600;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Grid for First/Follow sets */
+.sets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Lists for sets and steps */
+.sets-list,
+.steps-list {
+  list-style: none;
+  padding: 0;
+  color: #1e293b;
+}
+
+.sets-list li,
+.steps-list li {
+  margin: 10px 0;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sets-list span:first-child {
+  font-weight: 600;
+  color: #4a90e2;
+  margin-right: 10px;
+}
+
+/* Table container for parsing table */
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  text-align: center;
+  color: #1e293b;
+}
+
+th {
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+td {
+  background: #f9fafb;
+}
+
+/* Parse tree container */
+.parse-tree-container {
+  width: 100%;
+  height: 800px; /* Increased height for full tree visibility */
+  overflow: auto; /* Scroll if tree exceeds container */
+  background: #fff; /* White background for contrast */
+  border-radius: 8px;
+  padding: 20px; /* Padding around the tree */
+  box-sizing: border-box;
+}
+
+/* Ensure SVG fits container */
+.parse-tree-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Node styling */
+.rd3t-node circle {
+  fill: #4A90E2 !important; /* Non-terminal nodes */
+  stroke: #ffd700 !important;
+  stroke-width: 2px !important;
+  r: 10 !important; /* Smaller radius for compact layout */
+  transition: fill 0.3s ease;
+}
+
+.rd3t-node:hover circle {
+  fill: #357abd !important; /* Hover effect */
+}
+
+.rd3t-leaf-node circle {
+  fill: #50C878 !important; /* Terminal nodes */
+  stroke: #ffd700 !important;
+  stroke-width: 2px !important;
+  r: 10 !important;
+}
+
+/* Text styling for nodes */
+.rd3t-node text,
+.rd3t-leaf-node text {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important; /* Adjusted for readability */
+  fill: #1e293b !important;
+  text-anchor: middle !important;
+}
+
+/* Link styling */
+.rd3t-link path {
+  stroke: #4a90e2 !important;
+  stroke-width: 2px !important;
+  stroke-opacity: 0.8 !important;
+  transition: stroke 0.3s ease !important;
+}
+
+.rd3t-link:hover path {
+  stroke: #ffd700 !important; /* Hover effect on links */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 15px;
+    margin: 10px 0;
+  }
+
+  textarea {
+    height: 150px;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"] {
+    height: 50px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .sets-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .parse-tree-container {
+    height: 500px; /* Reduced height for smaller screens */
+    padding: 10px;
+  }
+
+  .rd3t-node text,
+  .rd3t-leaf-node text {
+    font-size: 12px !important; /* Smaller text on mobile */
+  }
+
+  .rd3t-node circle,
+  .rd3t-leaf-node circle {
+    r: 8 !important; /* Smaller nodes on mobile */
+  }
+}
+
+.success {
+  color: #50C878;
+  margin-top: 15px;
+  font-weight: 600;
+  background: rgba(80, 200, 120, 0.1);
+  padding: 10px;
+  border-radius: 5px;
 }
